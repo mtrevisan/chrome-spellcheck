@@ -1,7 +1,7 @@
 var bootstraped = false;
 
-function bootstrap() {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+function bootstrap(){
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
     activeTabId = tabs[0].id
 
     chrome.tabs.insertCSS(activeTabId, {file: "spell/spell.css"});
@@ -11,21 +11,18 @@ function bootstrap() {
   });
 }
 
-function toggleSpellCheck() {
-  if (!bootstraped) {
+function toggleSpellCheck(){
+  if(!bootstraped)
     bootstrap();
-  }
-  else {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, { command: 'toggle-spell-check'});
+  else
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+      chrome.tabs.sendMessage(tabs[0].id, {command: 'toggle-spell-check'});
     });
-  }
 }
 
 chrome.browserAction.onClicked.addListener(bootstrap);
 
-chrome.commands.onCommand.addListener(function(command) {
-  if (command === 'toggle-spell-check') {
+chrome.commands.onCommand.addListener(function(command){
+  if(command === 'toggle-spell-check')
     toggleSpellCheck();
-  }
 });
