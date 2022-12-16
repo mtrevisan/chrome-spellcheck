@@ -3,10 +3,10 @@ var dictionaryFolder = 'typo/dictionaries/';
 var dictionaryLanguage = 'vec_IT';
 var dictionaryLanguageAffixFile = dictionaryLanguage + '.aff';
 var dictionaryLanguageDictionaryFile = dictionaryLanguage + '.dic';
-var affData = utilityDict._readFile(chrome.extension.getURL(dictionaryFolder + dictionaryLanguage + '/' + dictionaryLanguageAffixFile));
-var wordData = utilityDict._readFile(chrome.extension.getURL(dictionaryFolder + dictionaryLanguage + '/' + dictionaryLanguageDictionaryFile));
+var affixData = utilityDict.readFile(chrome.extension.getURL(dictionaryFolder + dictionaryLanguage + '/' + dictionaryLanguageAffixFile));
+var dictionaryData = utilityDict.readFile(chrome.extension.getURL(dictionaryFolder + dictionaryLanguage + '/' + dictionaryLanguageDictionaryFile));
 
-var dict = new Typo(dictionaryLanguage, affData, wordData);
+var dict = new Typo(dictionaryLanguage, affixData, dictionaryData);
 var ignore = 'style script textarea code canvas'.replace(/\w+/g, '$&, $& *,').slice(0, -1);
 var pElm;
 
